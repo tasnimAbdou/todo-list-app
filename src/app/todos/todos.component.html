@@ -1,0 +1,46 @@
+<div class="background">
+<div @todoparent class="container">
+  <h1>To Do List</h1>
+  <h2>
+    <button (click)="show(true)">New Task</button>
+  </h2>
+
+<div class="add" *ngIf="showit"> 
+  <input (keyup.enter)="addItem(itemInput.value)"   type="text" 
+  class="form-control itemInput" #itemInput [value]="inputItm"
+   />
+  <button (click)="addItem(itemInput.value)">add</button>
+  <button (click)="cancelAdd()">cancel</button>
+</div>  
+<div class="add" *ngIf="editli"> 
+  <input (keyup.enter)="addItem(editInput.value)"   type="text" 
+  class="form-control itemInput" #editInput [value]="edieItem"
+   />
+  <button (click)="addItem(editInput.value)">add</button>
+  <button (click)="cancelEdit()">cancel</button>
+</div> 
+  
+  <div class="list-group" *ngIf="items">
+
+    <ul>
+      <li class="list-group-item " @new *ngFor="let item of items$" >
+       <div class="left">{{item.payload.val()}}</div> 
+       <div class="right"><button (click)="removeItem(item.key)">
+        <i class="fas fa-clipboard-check"></i>
+      </button>
+      <button (click)="edit(item.payload.val(),item.key)">
+        <i class="fas fa-edit"></i>
+      </button>
+      <button (click)="removeItem(item.key)">  <i class="fas fa-trash-alt"></i>
+      </button></div>
+        
+      </li>
+
+    </ul>
+
+
+
+  </div>
+
+</div>
+</div>
